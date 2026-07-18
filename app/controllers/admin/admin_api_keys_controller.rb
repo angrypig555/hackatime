@@ -44,7 +44,8 @@ class Admin::AdminApiKeysController < Admin::BaseController
   end
 
   def set_own_admin_api_key
-    @admin_api_key = current_user.admin_api_keys.find_by(id: params[:id])
+    admin_api_keys = current_user.admin_level_ultraadmin? ? AdminApiKey : current_user.admin_api_keys
+    @admin_api_key = admin_api_keys.find_by(id: params[:id])
     return if @admin_api_key
     redirect_to admin_admin_api_keys_path, alert: "You can only revoke your own admin API keys."
   end

@@ -193,7 +193,7 @@ RSpec.describe 'Api::Admin::V1::Resources', type: :request, openapi_spec: 'admin
 
     delete('Revoke Admin API Key') do
       tags 'Admin Resources'
-      description 'Revoke/Delete an admin API key. Only the owner of the key may revoke it.'
+      description 'Revoke/Delete an admin API key. Ultraadmins may revoke any key, and other admins may only revoke their own.'
       security [ AdminToken: [] ]
       produces 'application/json'
 
